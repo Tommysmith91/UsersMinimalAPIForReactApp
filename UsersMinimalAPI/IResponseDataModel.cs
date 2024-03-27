@@ -1,7 +1,7 @@
 ﻿namespace UsersMinimalAPI
 {
-    public interface IResponseDataModel<T> where T : class
+    public interface IResponseDataModel<T> : IResponseModel
     {
-        public T Results { get; set; }
+        public T Data { get; set; }
     }
 }

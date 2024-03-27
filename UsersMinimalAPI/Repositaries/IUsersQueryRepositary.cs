@@ -4,7 +4,7 @@ namespace UsersMinimalAPI.Repositaries
 {
     public interface IUsersQueryRepositary
     {
-        List<User> GetAllUsers();
-        User GetUser(int id);
+        Task<IResponseDataModel<IEnumerable<User>>> GetAllUsers();
+        Task<IResponseDataModel<User>> GetUser(int id);
     }
 }

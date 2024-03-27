@@ -1,4 +1,5 @@
-﻿using UsersMinimalAPI.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using UsersMinimalAPI.Entities;
 
 namespace UsersMinimalAPI.Repositaries
 {
@@ -10,14 +11,34 @@ namespace UsersMinimalAPI.Repositaries
             _dbContext = dbContext;
         }
 
-        public List<User> GetAllUsers()
+        public async Task<IResponseDataModel<IEnumerable<User>>> GetAllUsers()
         {
-            return _dbContext.Users.ToList();
+            return new ResponseDataModel<IEnumerable<User>>()
+            {
+                Data = await _dbContext.Users.ToListAsync(),
+                IsSuccess = true
+            };
+            
         }
-        public User GetUser(int id)
+        public async Task<IResponseDataModel<User>> GetUser(int id)
         {
-            return _dbContext.Users.Find(id);
+            var user = await _dbContext.Users.FindAsync(id);
+            if(user == null)
+            {
+                return new ResponseDataModel<User>
+                {
+                    IsSuccess = false,
+                    Message = "User Not Found"
+                };
+            }
+            return new ResponseDataModel<User>
+            {
+                IsSuccess = true,
+                Data = user
+            };
+            
         }
+
 
     }
 }

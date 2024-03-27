@@ -12,5 +12,23 @@ namespace UsersMinimalAPI.Entities
         public string PasswordHash { get; set; } = string.Empty;
 
         public DateTime RegistrationDate { get; set; }
+
+        public User()
+        {
+        }
+        public User(UsersDTO userDTO)
+        {
+            Id = userDTO.Id;
+            Email = userDTO.Email;
+            RegistrationDate = userDTO.RegistrationDate;            
+        }
+        public User(UsersDTO userDTO, string passwordHash)
+        {
+            Id = userDTO.Id;
+            Email = userDTO.Email;
+            PasswordHash = passwordHash;
+            RegistrationDate = userDTO.RegistrationDate;
+        }
+        
     }
 }

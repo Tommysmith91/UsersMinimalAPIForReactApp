@@ -6,8 +6,7 @@ public class UsersDTO
     public string Email { get; set; } = string.Empty;
     public string Password { get; set;} = string.Empty;
     public DateTime RegistrationDate { get; set; }
-
-    
+    public string CompanyName { get; set; } = string.Empty;
 
     public UsersDTO() { }
     public UsersDTO(User user)
@@ -15,6 +14,7 @@ public class UsersDTO
         Id = user.Id;
         Email = user.Email;
         Password = user.PasswordHash;
+        CompanyName = user.CompanyName;
         RegistrationDate = user.RegistrationDate;        
     }
 }

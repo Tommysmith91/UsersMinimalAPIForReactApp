@@ -70,29 +70,28 @@ app.MapPost("/api/users", async (UsersDTO usersDTO, IMediator mediator) =>
 });
 
 app.MapPut("/api/users/{id}", async (int id, UsersDTO usersDTO, IMediator mediator) =>
-{
-    if (id != usersDTO.Id)
+{    
+    var result = await mediator.Send(new UpdateUserCommand() { UsersDTO = usersDTO,Id = id });
+    if (result.IsSuccess)
     {
-        return Results.BadRequest();
-    }
-
-    // Implement logic to update an existing user
-    // Example: await mediator.Send(new UpdateUserCommand(id, usersDTO));
-    return Results.NoContent();
+        return Results.NoContent();
+    }    
+    return Results.BadRequest(result.Message);
 });
 
 app.MapDelete("/api/users/{id}", async (int id, IMediator mediator) =>
 {
-    // Implement logic to delete a user by ID
-    // Example: await mediator.Send(new DeleteUserCommand(id));
-    return Results.NoContent();
+    var result = await mediator.Send(new DeleteUserCommand() { Id = id });
+    if (result.IsSuccess)
+    {
+        return Results.NoContent();
+    }    
+    return Results.BadRequest(result.Message);
 });
 
 app.MapPost("/api/users/authorize", async (IMediator mediator) =>
 {
-    // Implement authorization logic using IMediator
-    // Example: var isAuthorized = await mediator.Send(new AuthorizeUserCommand());
-    // return Results.Ok(isAuthorized);
+    
     return Results.Ok();
 });
 

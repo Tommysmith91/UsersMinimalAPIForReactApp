@@ -13,6 +13,8 @@ namespace UsersMinimalAPI.Entities
 
         public DateTime RegistrationDate { get; set; }
 
+        public string CompanyName { get; set; } = string.Empty;
+
         public User()
         {
         }
@@ -20,7 +22,8 @@ namespace UsersMinimalAPI.Entities
         {
             Id = userDTO.Id;
             Email = userDTO.Email;
-            RegistrationDate = userDTO.RegistrationDate;            
+            RegistrationDate = userDTO.RegistrationDate;
+            CompanyName = userDTO.CompanyName;
         }
         public User(UsersDTO userDTO, string passwordHash)
         {
@@ -28,6 +31,7 @@ namespace UsersMinimalAPI.Entities
             Email = userDTO.Email;
             PasswordHash = passwordHash;
             RegistrationDate = userDTO.RegistrationDate;
+            CompanyName = userDTO.CompanyName;
         }
         
     }

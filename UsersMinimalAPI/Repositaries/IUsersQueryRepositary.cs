@@ -6,5 +6,7 @@ namespace UsersMinimalAPI.Repositaries
     {
         Task<IResponseDataModel<IEnumerable<User>>> GetAllUsers();
         Task<IResponseDataModel<User>> GetUser(int id);
+        Task<IResponseDataModel<User>> GetUser(string username);
+
     }
 }

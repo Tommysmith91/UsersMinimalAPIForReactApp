@@ -38,6 +38,23 @@ namespace UsersMinimalAPI.Repositaries
             };
             
         }
+        public async Task<IResponseDataModel<User>> GetUser(string email)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(x=> x.Email == email);
+            if (user == null)
+            {
+                return new ResponseDataModel<User>
+                {
+                    IsSuccess = false,
+                    Message = "User Not Found"
+                };
+            }
+            return new ResponseDataModel<User>
+            {
+                IsSuccess = true,
+                Data = user
+            };            
+        }
 
 
     }
